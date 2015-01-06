@@ -28,6 +28,9 @@
 		init: function() {
 			gitGet.el.$form.submit(function(e) {
   				e.preventDefault();
+
+  				gitGet.el.$resultsContainer.html('');
+  				
   				searchTerm = gitGet.el.$searchTerm.val().toLowerCase();
 
   				//check array for duplicates
@@ -35,17 +38,18 @@
   					return e.term === searchTerm;
   				});
 
-  				gitGet.el.$resultsContainer.html('');
-
-  				if (repeatCheck.length === 0) {
-  					firstQuery = true;
-  					results.push(new Result(searchTerm, null)); //if original, push to results array
-  					gitGet.getData(searchTerm);
+  				if (searchTerm != '') {
+  					if (repeatCheck.length === 0) {
+	  					firstQuery = true;
+	  					results.push(new Result(searchTerm, null)); //if original, push to results array
+	  					gitGet.getData(searchTerm);
+	  				} else {
+	  					firstQuery = false;
+	  					gitGet.retrieveData(searchTerm); //else retrieve existing array data
+	  				}
   				} else {
-  					firstQuery = false;
-  					gitGet.retrieveData(searchTerm); //else retrieve existing array data
+  					alert('Please Enter a Search Term');
   				}
-  				
 			});
 
 		},
@@ -58,7 +62,10 @@
                 dataType: 'jsonp',
                 success: function(data) {
 	                gitGet.setData(data, searchTerm);
-	            }   
+	            },
+	            error: function () {
+        			alert('Sorry, there was a problem with your request.');
+    			} 
             });
 		},
 		retrieveData: function(searchTerm) {
@@ -91,7 +98,7 @@
 
 			gitGet.events();
 
-			//find search term and asscoiate only if first query is true
+			//find search term and associate only if first query is true
 			if (firstQuery) {
 				for (var i = 0; i < results.length; i++) {
 					if (results[i].term === searchTerm) {

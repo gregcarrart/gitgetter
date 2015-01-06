@@ -135,7 +135,7 @@
 			gitGet.el.$overlayContainer.html('');
 		}
 	};
-	//init app!
+	//init app!!
 	gitGet.init();
 
 })(jQuery);

@@ -9,7 +9,7 @@
 		apiPageUrl,
 		results = [],
 		items = '',
-		modalContent = ''
+		modalContent = '',
 		firstQuery = true;
 	
 	var Result = function(term, results) {
@@ -135,7 +135,7 @@
 			gitGet.el.$overlayContainer.html('');
 		}
 	};
-	//init app
+	//init app!
 	gitGet.init();
 
 })(jQuery);

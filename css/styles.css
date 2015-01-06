@@ -1,14 +1,16 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
 body {
   background: #FFFFFF;
   color: #252525;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 18px; }
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 18px;
+  background: url(../img/noisy-texture-100x100-o5-d10-c-ededed-t1.png); }
 
 .container {
-  width: 700px;
+  width: 80%;
+  max-width: 800px;
   margin: 35px auto;
-  padding: 10px;
-  background: white; }
+  padding: 10px; }
 
 #search-form {
   display: block;
@@ -17,7 +19,7 @@ body {
     position: relative;
     float: left;
     display: block;
-    width: 250px;
+    width: 80%;
     height: 65px;
     padding: 10px 10px;
     padding-right: 30px;
@@ -36,18 +38,139 @@ body {
     transition: all 0.4s linear; }
   #search-form .search-field:focus {
     outline: none;
-    width: 80%;
     color: #252525;
     -webkit-box-shadow: 0 0 0 10px #999;
     -moz-box-shadow: 0 0 0 10px #999;
     box-shadow: 0 0 10px #999; }
   #search-form .search-button {
-    width: 110px;
+    width: 20%;
     height: 64px;
     padding: 10px 15px 11px;
     font-size: 18px;
     background-color: #FF4000;
-    text-shadow: 1px 1px #FF4000;
     color: #ffffff;
     border: 1px solid #FF4000;
-    cursor: pointer; }
+    cursor: pointer;
+    transition: background-color 0.5s ease; }
+    #search-form .search-button:hover {
+      background-color: #B40404; }
+    @media (max-width: 768px) {
+      #search-form .search-button {
+        padding: 10px 7px 11px;
+        font-size: 14px; } }
+
+#results-container {
+  position: relative;
+  width: 100%; }
+  #results-container .item {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+    transition: background .5s ease; }
+    #results-container .item .repo-name, #results-container .item .repo-owner {
+      position: relative;
+      width: 50%;
+      height: 100%;
+      float: left; }
+      #results-container .item .repo-name span, #results-container .item .repo-owner span {
+        position: relative;
+        line-height: 50px;
+        margin-left: 5%; }
+        @media (max-width: 768px) {
+          #results-container .item .repo-name span, #results-container .item .repo-owner span {
+            top: 30%;
+            font-size: 2.7vw;
+            margin-bottom: 2%;
+            margin-left: 1%;
+            display: block !important;
+            display: -webkit-box !important;
+            max-width: 90%;
+            height: 3.5vw;
+            line-height: 1.4;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+            text-overflow: ellipsis; } }
+    #results-container .item:hover {
+      background: #FF4000; }
+  #results-container .item:nth-of-type(odd) {
+    background-color: #ccc; }
+    #results-container .item:nth-of-type(odd):hover {
+      background: #FF4000; }
+
+#overlay-container {
+  display: none;
+  position: fixed;
+  width: 80%;
+  height: 60%;
+  min-height: 500px;
+  top: 20%;
+  left: 10%;
+  background: #fff;
+  z-index: 200; }
+  @media (max-width: 768px) {
+    #overlay-container {
+      max-height: 350px; } }
+  #overlay-container .modal {
+    position: relative;
+    width: 90%;
+    left: 5%;
+    top: 5%; }
+    #overlay-container .modal .modal-close {
+      position: relative;
+      top: 0;
+      left: 0;
+      color: #fff;
+      cursor: pointer;
+      transition: color .5s ease;
+      margin-top: -70px;
+      margin-right: -5.5%;
+      float: right; }
+      #overlay-container .modal .modal-close:hover {
+        color: #FF4000; }
+    #overlay-container .modal .modal-title {
+      position: relative;
+      width: 100%;
+      font-size: 4vw; }
+      @media (max-width: 768px) {
+        #overlay-container .modal .modal-title {
+          font-size: 9vw; } }
+    #overlay-container .modal .modal-owner {
+      position: relative;
+      width: 100%;
+      font-size: 2vw; }
+      @media (max-width: 768px) {
+        #overlay-container .modal .modal-owner {
+          font-size: 4vw; } }
+      #overlay-container .modal .modal-owner a {
+        color: #FF4000;
+        transition: color 0.5s ease;
+        text-decoration: none; }
+        #overlay-container .modal .modal-owner a:hover {
+          color: #333; }
+    #overlay-container .modal .modal-text {
+      position: relative;
+      width: 100%;
+      float: left;
+      margin-bottom: 5%;
+      font-size: 1.5vw; }
+      @media (max-width: 768px) {
+        #overlay-container .modal .modal-text {
+          font-size: 3.5vw; } }
+      #overlay-container .modal .modal-text a {
+        color: #FF4000;
+        transition: color 0.5s ease;
+        text-decoration: none; }
+        #overlay-container .modal .modal-text a:hover {
+          color: #333; }
+
+.modal-cover {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.7); }

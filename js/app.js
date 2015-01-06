@@ -9,7 +9,8 @@
 		apiPageUrl,
 		results = [],
 		items = '',
-		modalContent = '';
+		modalContent = ''
+		firstQuery = true;
 	
 	var Result = function(term, results) {
 		this.term = term;
@@ -29,6 +30,7 @@
   				e.preventDefault();
   				searchTerm = gitGet.el.$searchTerm.val().toLowerCase();
 
+  				//check array for duplicates
   				var repeatCheck = $.grep(results, function(e) {
   					return e.term === searchTerm;
   				});
@@ -36,10 +38,12 @@
   				gitGet.el.$resultsContainer.html('');
 
   				if (repeatCheck.length === 0) {
-  					results.push(new Result(searchTerm, null));
+  					firstQuery = true;
+  					results.push(new Result(searchTerm, null)); //if original, push to results array
   					gitGet.getData(searchTerm);
   				} else {
-  					gitGet.retrieveData(searchTerm);
+  					firstQuery = false;
+  					gitGet.retrieveData(searchTerm); //else retrieve existing array data
   				}
   				
 			});
@@ -87,10 +91,13 @@
 
 			gitGet.events();
 
-			for (var i = 0; i < results.length; i++) {
-				if (results[i].term === searchTerm) {
-					results[i].results = data;
-					break;
+			//find search term and asscoiate only if first query is true
+			if (firstQuery) {
+				for (var i = 0; i < results.length; i++) {
+					if (results[i].term === searchTerm) {
+						results[i].results = data;
+						break;
+					}
 				}
 			}
 		},
@@ -128,7 +135,7 @@
 			gitGet.el.$overlayContainer.html('');
 		}
 	};
-
+	//init app
 	gitGet.init();
 
 })(jQuery);

@@ -1,0 +1,21 @@
+{
+  "name": "gitgetter",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "subdomain": "",
+  "engines": {
+    "node": "0.10.x"
+  }
+}

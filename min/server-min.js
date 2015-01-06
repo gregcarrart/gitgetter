@@ -1,0 +1,1 @@
+var express=require("express"),app=express(),hostname=process.env.HOSTNAME||"localhost",port=parseInt(process.env.PORT,10)||3e3;app.get("/",function(e,s){s.redirect("/index.html")}),app.use(express.static(__dirname+"/public")),console.log("Simple static server listening at http://"+hostname+":"+port),app.listen(port,hostname);
